@@ -23,5 +23,10 @@ app.get('/', (req, res) => {
 const breadsController = require('./controllers/breadsController.js')
 app.use('/breads', breadsController)
 
+//404 Wildcard Route
+app.get('*', (req, res) => {
+    res.send('404')
+})
+
 //Listen
 app.listen(PORT, () => {console.log(`Listening on ${PORT}`)})

@@ -2,7 +2,7 @@ const React = require('react')
 const Def = require('./layouts/default')
 
 function Show ({bread}) {
-  console.log(bread.name)
+  //console.log(bread.name)
     return (
       <Def>
         <h2>Show Page</h2>

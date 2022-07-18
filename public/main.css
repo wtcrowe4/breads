@@ -8,4 +8,8 @@ body {
     margin: auto;
   }
   
-  
+#errorImage {
+  height: 60vh;
+  width: 60vw;
+} 
+

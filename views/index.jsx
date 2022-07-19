@@ -19,6 +19,9 @@ const Index = ({breads, title}) => {
                     })
                 }
             </ul>
+            <div className="newButton">
+                <a href="/breads/new"><button>Add a New Bread</button></a>
+            </div>
         </Def>
     )
 }

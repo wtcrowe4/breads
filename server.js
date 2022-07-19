@@ -13,6 +13,7 @@ app.engine('jsx', require('express-react-views').createEngine())
 
 //Middleware
 app.use(express.static('public'))
+app.use(express.urlencoded({extended: true}))
 
 //Routes
 app.get('/', (req, res) => {

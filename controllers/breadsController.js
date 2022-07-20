@@ -47,4 +47,10 @@ breads.get('/:arrayIndex', (req, res) => {
     
 })
 
+//Delete
+breads.delete('/:arrayIndex', (req, res) => {
+    BREAD.splice(req.params.arrayIndex, 1)
+    res.status(303).redirect('/breads')
+})
+
 module.exports = breads

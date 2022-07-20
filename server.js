@@ -1,6 +1,7 @@
 //Dependancies
 const express = require('express')
 const dotenv = require('dotenv').config()
+const methodOverride = require('method-override')
 
 //Config
 const PORT = process.env.PORT
@@ -10,6 +11,7 @@ const app = express()
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
+app.use(methodOverride('_method'))
 
 //Middleware
 app.use(express.static('public'))

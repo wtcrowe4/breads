@@ -14,6 +14,7 @@ const New = () => {
                 required
             />
             <label htmlFor="image">Image</label>
+            {/* Add a Regex to make sure people add valid link to image */}
             <input
                 type="text"
                 name="image"

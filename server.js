@@ -2,18 +2,23 @@
 const express = require('express')
 const dotenv = require('dotenv').config()
 const methodOverride = require('method-override')
+const mongoose = require('mongoose')
 
 //Config
 const PORT = process.env.PORT
+const MONGO_URI = process.env.MONGO_URI
 const app = express()
+
+
+//Database
+mongoose.connect(MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true}, 
+    () => {console.log(`Mongo connected: ${MONGO_URI}`)})
 
 //Middleware
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
 app.use(methodOverride('_method'))
-
-//Middleware
 app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
 

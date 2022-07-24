@@ -14,6 +14,7 @@ breads.post('/', (req, res) => {
     if(!req.body.image) {req.body.image = undefined}
     if(req.body.hasGluten === 'on') {req.body.hasGluten = 'true'} 
     else {req.body.hasGluten = 'false'}
+    // add a .catch for errors creating a bread
     BREAD.create(req.body)
     res.redirect('/breads')
 })

@@ -13,3 +13,11 @@ body {
   width: 60vw;
 } 
 
+.buttons {
+  display: flex;
+  padding: 20px;
+}
+
+button, #deletebtn, #submitbtn  {
+  margin: 20px;
+}

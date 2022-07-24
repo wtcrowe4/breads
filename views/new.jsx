@@ -20,6 +20,15 @@ const New = () => {
                 name="image"
                 id="image"
             />
+            <label htmlFor="baker">Baker</label>
+            <select name="baker" id="baker">
+                <option value="Rachel">Rachel</option>
+                <option value="Monica">Monica</option>
+                <option value="Joey">Joey</option>
+                <option value="Chandler">Chandler</option>
+                <option value="Ross">Ross</option>
+                <option value="Phoebe">Phoebe</option>
+            </select>
             <label htmlFor="hasGluten">Has Gluten?</label>
             <input 
                 type="checkbox"
@@ -28,11 +37,9 @@ const New = () => {
                 defaultChecked
             />
             <br />
-            <input type="submit" />
+            <input id="submitbtn" type="submit" />
         </form>
-        <div className="backButton">
-            <a href="/breads"><button>Go back to Breads</button></a>
-        </div>
+        <a href="/breads"><button>Go back to Breads</button></a>
     </Def>
     )
 }

@@ -14,6 +14,7 @@ const Index = ({breads, title}) => {
                                 <a href={`/breads/${bread.id}`}>
                                     {bread.name}
                                 </a>
+                                <span>- {bread.getBakedBy()}</span>
                             </li>
                         )
                     })

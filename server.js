@@ -31,6 +31,10 @@ app.get('/', (req, res) => {
 const breadsController = require('./controllers/breadsController.js')
 app.use('/breads', breadsController)
 
+//Bakers
+const bakersController = require('./controllers/bakersController.js')
+app.use('/bakers', bakersController)
+
 //404 Wildcard Route
 app.get('*', (req, res) => {
     res.send('404')

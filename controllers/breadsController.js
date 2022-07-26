@@ -2,10 +2,12 @@ const express = require('express')
 const breads = express.Router()
 const BREAD = require('../models/bread.js')
 const seedData = require('../models/seedData.js')
+const Baker = require('../models/baker.js')
 
 //Index 
 breads.get('/', (req, res) => {
     BREAD.find()
+        .populate('baker')
         .then(foundBreads => res.render('Index',{ breads: foundBreads, title: 'Index Page' }))
 }) 
 
@@ -21,7 +23,11 @@ breads.post('/', (req, res) => {
 
 //New
 breads.get('/new', (req, res) => {
-    res.render('new')
+    Baker.find()
+        .then(foundBakers => {
+            res.render('new', {bakers: foundBakers})
+        })
+    
 })
 
 //Seed 
@@ -39,7 +45,12 @@ breads.get('/:id/edit', (req, res) => {
 //Show
 breads.get('/:id', (req, res) => {
     BREAD.findById(req.params.id)
-        .then(foundBread => res.render('Show', { bread: foundBread }))
+        .populate('baker')
+        .then(foundBread => {
+            // const otherBreads = foundBread.getOtherBreadsByBaker()
+            // console.log({otherBreads})
+            res.render('Show', { bread: foundBread })
+        })
         .catch(error => res.render('404'))
 })
 

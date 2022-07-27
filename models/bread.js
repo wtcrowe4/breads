@@ -9,7 +9,6 @@ const breadSchema = new Schema({
   baker: { 
     type: Schema.Types.ObjectID,
     ref: 'Baker'
-    // enum: ['Rachel', 'Monica', 'Joey', 'Chandler', 'Ross', 'Phoebe']}
   }
 })
 

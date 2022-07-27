@@ -6,9 +6,16 @@ const Baker = require('../models/baker.js')
 
 //Index 
 breads.get('/', (req, res) => {
-    BREAD.find()
-        .populate('baker')
-        .then(foundBreads => res.render('Index',{ breads: foundBreads, title: 'Index Page' }))
+    Baker.find()
+        .then(foundBakers => {
+            BREAD.find()
+                .populate('baker')
+                .then(foundBreads => res.render('Index', { 
+                    breads: foundBreads,
+                    bakers: foundBakers,
+                    title: 'Index Page' }
+                ))
+        })
 }) 
 
 //Create

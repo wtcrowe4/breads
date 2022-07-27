@@ -38,8 +38,16 @@ breads.get('/data/seed', (req, res) => {
 
 //Edit
 breads.get('/:id/edit', (req, res) => {
-   BREAD.findById(req.params.id)
-    .then(foundBread => res.render('Edit', {bread: foundBread})) 
+   Baker.find()
+    .then(foundBakers => {
+        BREAD.findById(req.params.id)
+            .then(foundBread => { 
+                res.render('Edit', {
+                    bread: foundBread,
+                    bakers: foundBakers
+                    })
+            }) 
+    })
 })
 
 //Show

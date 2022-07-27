@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
 
+
 const breadSchema = new Schema({
   name: { type: String, required: true },
   hasGluten: Boolean,
@@ -14,7 +15,10 @@ const breadSchema = new Schema({
 
 //Methods
 breadSchema.methods.getBakedBy = function () {
-  return(`${this.name} bread was baked with love by ${this.baker}.`)}
+  return `${this.name} bread was baked with love by ${this.baker.name}, who has been with us since ${this.baker.startDate.getFullYear()}.`
+}
+  
+
 
 // breadSchema.static.getOtherBreadsByBaker = function() {
 //   return( mongoose.model('bread_types').find({ baker: this.baker})

@@ -1,7 +1,7 @@
 const React = require('react')
 const Def = require('./layouts/default')
 
-const Show = ({bread, index}) => {
+const Show = ({bread, baker}) => {
   return (
     <Def title={bread.name}>
       {/* <h2>Show Page</h2> */}

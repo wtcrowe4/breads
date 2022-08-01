@@ -5,27 +5,39 @@ const seedData = require('../models/seedData.js')
 const Baker = require('../models/baker.js')
 
 //Index 
-breads.get('/', (req, res) => {
-    Baker.find()
-        .then(foundBakers => {
-            BREAD.find()
-                .populate('baker')
-                .then(foundBreads => res.render('Index', { 
-                    breads: foundBreads,
-                    bakers: foundBakers,
-                    title: 'Index Page' }
-                ))
-        })
-}) 
+breads.get('/', async (req, res) => {
+    const foundBakers = await Baker.find()
+    const foundBreads = await BREAD.find().limit(10).populate('baker')
+    res.render('Index', { 
+        breads: foundBreads,
+        bakers: foundBakers,
+        title: 'Index Page' }
+    ) 
+})
+//     Baker.find()
+//     .then(foundBakers => {
+//         BREAD.find()
+//         .populate('baker')
+//         .then(foundBreads => {
+//             res.render('index', { 
+//                 breads: foundBreads,
+//                 bakers: foundBakers,
+//                 title: 'Index Page' }
+//             )
+//         }).catch(err => res.send(err))
+
+//     })
+//     .catch(err => res.send(err))
+// }) 
 
 //Create
 breads.post('/', (req, res) => {
     if(!req.body.image) {req.body.image = undefined}
     if(req.body.hasGluten === 'on') {req.body.hasGluten = 'true'} 
     else {req.body.hasGluten = 'false'}
-    // add a .catch for errors creating a bread
     BREAD.create(req.body)
-    res.redirect('/breads')
+        .then(newBread => res.redirect('/breads'))
+        .catch(err => res.send(err).render('404'))
 })
 
 //New
@@ -34,6 +46,7 @@ breads.get('/new', (req, res) => {
         .then(foundBakers => {
             res.render('new', {bakers: foundBakers})
         })
+        .catch(err => res.send(err).render('404'))
     
 })
 
@@ -41,6 +54,7 @@ breads.get('/new', (req, res) => {
 breads.get('/data/seed', (req, res) => {
     BREAD.insertMany(seedData)
         .then(createdBreads => res.redirect('/breads'))
+        .catch(err => res.send(err).render('404'))
 })
 
 //Edit
@@ -53,8 +67,10 @@ breads.get('/:id/edit', (req, res) => {
                     bread: foundBread,
                     bakers: foundBakers
                     })
-            }) 
+            })
+            .catch(err => res.send(err).render('404')) 
     })
+    .catch(err => res.send(err).render('404'))
 })
 
 //Show
@@ -66,13 +82,14 @@ breads.get('/:id', (req, res) => {
             // console.log({otherBreads})
             res.render('Show', { bread: foundBread })
         })
-        .catch(error => res.render('404'))
+        .catch(err => res.send(err).render('404'))
 })
 
 //Delete
 breads.delete('/:id', (req, res) => {
     BREAD.findByIdAndDelete(req.params.id)
         .then(deletedBread => res.status(303).redirect('/breads'))
+        .catch(err => res.send(err).render('404'))
 })
 
 //Update
@@ -81,6 +98,7 @@ breads.put('/:id', (req, res) => {
     else {req.body.hasGluten = false}
     BREAD.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then(updatedBread => res.redirect(`/breads/${req.params.id}`))
+        .catch(err => res.send(err).render('404'))
 })
 
 module.exports = breads

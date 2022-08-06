@@ -1,3 +1,5 @@
+//This seed data will throw an error beacause it doesn't include the baker id.
+
 const seedData = [
     {
       name: 'Rye',

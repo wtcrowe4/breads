@@ -63,7 +63,7 @@ breads.get('/:id/edit', (req, res) => {
     .then(foundBakers => {
         BREAD.findById(req.params.id)
             .then(foundBread => { 
-                res.render('Edit', {
+                res.render('edit', {
                     bread: foundBread,
                     bakers: foundBakers
                     })
@@ -80,7 +80,7 @@ breads.get('/:id', (req, res) => {
         .then(foundBread => {
             // const otherBreads = foundBread.getOtherBreadsByBaker()
             // console.log({otherBreads})
-            res.render('Show', { bread: foundBread })
+            res.render('show', { bread: foundBread })
         })
         .catch(err => res.send(err).render('404'))
 })

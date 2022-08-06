@@ -1,5 +1,5 @@
 const React = require('react')
-const Def = require('./layouts/Default')
+const Def = require('./layouts/default')
 
 function Show ({baker}) {
     return (
